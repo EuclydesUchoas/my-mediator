@@ -1,17 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMediator.API", "MyMediator.API\MyMediator.API.csproj", "{36E4F529-FAE2-4EFF-8317-AA9D172E1B6A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5BF6E65F-934B-4073-9450-7064E4560F10} = {5BF6E65F-934B-4073-9450-7064E4560F10}
+		{5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6} = {5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6}
+		{A6F47022-A39A-4280-AEE2-80D20A4E4141} = {A6F47022-A39A-4280-AEE2-80D20A4E4141}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMediator.Application", "MyMediator.Application\MyMediator.Application.csproj", "{5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6F47022-A39A-4280-AEE2-80D20A4E4141} = {A6F47022-A39A-4280-AEE2-80D20A4E4141}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMediator.Domain", "MyMediator.Domain\MyMediator.Domain.csproj", "{A6F47022-A39A-4280-AEE2-80D20A4E4141}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMediator.Infrastructure", "MyMediator.Infrastructure\MyMediator.Infrastructure.csproj", "{5BF6E65F-934B-4073-9450-7064E4560F10}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6} = {5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6}
+		{A6F47022-A39A-4280-AEE2-80D20A4E4141} = {A6F47022-A39A-4280-AEE2-80D20A4E4141}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMediator.Tests", "MyMediator.Tests\MyMediator.Tests.csproj", "{419C7F13-CF4B-44F9-AB3F-42D020165A0A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36E4F529-FAE2-4EFF-8317-AA9D172E1B6A} = {36E4F529-FAE2-4EFF-8317-AA9D172E1B6A}
+		{5BF6E65F-934B-4073-9450-7064E4560F10} = {5BF6E65F-934B-4073-9450-7064E4560F10}
+		{5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6} = {5C79C2F4-2AA4-49B9-B823-4CC211FC1DB6}
+		{A6F47022-A39A-4280-AEE2-80D20A4E4141} = {A6F47022-A39A-4280-AEE2-80D20A4E4141}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

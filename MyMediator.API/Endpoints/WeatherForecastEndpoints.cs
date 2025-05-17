@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using MyMediator.Application.Dtos.WeatherForecast;
+using MyMediator.Application.Features.WeatherForecast.Queries;
+using MyMediator.Application.Mediator;
 
 namespace MyMediator.API.Endpoints;
 
@@ -17,40 +21,22 @@ public sealed class WeatherForecastEndpoints : IEndpoint
             .WithName("Get Weather Forecast By Summary");
     }
 
-    private static readonly string[] _summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
-
-    public static async Task<Ok<WeatherForecast[]>> Get()
+    public static async Task<Ok<IEnumerable<WeatherForecastDto>>> Get([FromServices] ISender sender)
     {
-        var forecast = await Task.FromResult(Enumerable.Range(1, 5)
-            .Select(index => new WeatherForecast(
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                _summaries[Random.Shared.Next(_summaries.Length)]
-                ))
-            .ToArray());
+        var forecast = await sender.Send(new GetAllWeatherForecastQuery());
 
         return TypedResults.Ok(forecast);
     }
 
-    public static async Task<Results<Ok<WeatherForecast>, NotFound>> GetBySummary(string summary)
+    public static async Task<Results<Ok<WeatherForecastDto>, NotFound>> GetBySummary([FromServices] ISender sender, string summary)
     {
-        if (!_summaries.Contains(summary))
+        var forecast = await sender.Send(new GetWeatherForecastBySummaryQuery(summary));
+
+        if (forecast is null)
         {
             return TypedResults.NotFound();
         }
 
-        var forecast = await Task.FromResult(
-            new WeatherForecast(
-                DateOnly.FromDateTime(DateTime.UtcNow),
-                Random.Shared.Next(-20, 55),
-                summary
-                ));
-
         return TypedResults.Ok(forecast);
     }
-}
-
-public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
