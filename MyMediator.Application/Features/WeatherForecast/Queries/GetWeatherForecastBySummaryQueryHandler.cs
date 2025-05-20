@@ -14,8 +14,8 @@ public sealed class GetWeatherForecastBySummaryQueryHandler : IRequestHandler<Ge
 
         var forecast = await Task.FromResult(
             new WeatherForecastDto(
-                DateOnly.FromDateTime(DateTime.UtcNow),
-                Random.Shared.Next(-20, 55),
+                DateOnly.FromDateTime(DateTime.UtcNow), 
+                Random.Shared.Next(-20, 55), 
                 request.Summary
                 ));
 

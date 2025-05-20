@@ -8,7 +8,7 @@ public sealed class GetAllWeatherForecastQueryHandler : IRequestHandler<GetAllWe
 {
     public async Task<IEnumerable<WeatherForecastDto>> Handle(GetAllWeatherForecastQuery request, CancellationToken cancellationToken)
     {
-        var forecast = await Task.FromResult(Enumerable.Range(1, 5)
+        var forecasts = await Task.FromResult(Enumerable.Range(1, 5)
             .Select(index => new WeatherForecastDto(
                 DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
                 Random.Shared.Next(-20, 55),
@@ -21,6 +21,6 @@ public sealed class GetAllWeatherForecastQueryHandler : IRequestHandler<GetAllWe
             throw new TaskCanceledException("Task was canceled.");
         }
 
-        return forecast;
+        return forecasts;
     }
 }

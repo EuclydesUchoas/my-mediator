@@ -23,9 +23,9 @@ public sealed class WeatherForecastEndpoints : IEndpoint
 
     public static async Task<Ok<IEnumerable<WeatherForecastDto>>> Get([FromServices] ISender sender)
     {
-        var forecast = await sender.Send(new GetAllWeatherForecastQuery());
+        var forecasts = await sender.Send(new GetAllWeatherForecastQuery());
 
-        return TypedResults.Ok(forecast);
+        return TypedResults.Ok(forecasts);
     }
 
     public static async Task<Results<Ok<WeatherForecastDto>, NotFound>> GetBySummary([FromServices] ISender sender, string summary)
