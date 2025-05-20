@@ -1,6 +1,5 @@
 ﻿using MyMediator.Application.Dtos.WeatherForecast;
 using MyMediator.Application.Mediator;
-using System.Collections.Concurrent;
 
 namespace MyMediator.Application.Features.WeatherForecast.Queries;
 
