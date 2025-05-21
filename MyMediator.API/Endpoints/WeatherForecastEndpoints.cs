@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MyMediator.Application.Dtos.WeatherForecast;
+using MyMediator.Application.Features.WeatherForecast.Commands;
 using MyMediator.Application.Features.WeatherForecast.Queries;
 using MyMediator.Application.Mediator;
 
@@ -13,6 +14,9 @@ public sealed class WeatherForecastEndpoints : IEndpoint
         var group = app
             .MapGroup("/api/v1/weatherforecast")
             .WithTags("Weather Forecast");
+
+        group.MapPost("/createsummary", CreateSummary)
+            .WithName("Create Weather Forecast Summary");
 
         group.MapGet("/", Get)
             .WithName("Get Weather Forecast");
@@ -38,5 +42,19 @@ public sealed class WeatherForecastEndpoints : IEndpoint
         }
 
         return TypedResults.Ok(forecast);
+    }
+
+    public static async Task<Results<Created<string>, BadRequest<string>>> CreateSummary([FromServices] ISender sender, string summary)
+    {
+        try
+        {
+            await sender.Send(new CreateWeatherForecastSummaryCommand(summary));
+
+            return TypedResults.Created(nameof(CreateSummary), summary);
+        }
+        catch (Exception ex)
+        {
+            return TypedResults.BadRequest(ex.Message);
+        }
     }
 }

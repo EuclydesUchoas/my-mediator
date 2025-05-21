@@ -11,7 +11,7 @@ public sealed class GetAllWeatherForecastQueryHandler : IRequestHandler<GetAllWe
             .Select(index => new WeatherForecastDto(
                 DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
                 Random.Shared.Next(-20, 55),
-                WeatherForecastDto.Summaries[Random.Shared.Next(WeatherForecastDto.Summaries.Count)]
+                WeatherForecastDto.Summaries.ElementAt(Random.Shared.Next(WeatherForecastDto.Summaries.Count))
                 ))
             .ToArray());
 

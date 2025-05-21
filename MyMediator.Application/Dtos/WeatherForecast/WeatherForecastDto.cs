@@ -8,16 +8,17 @@ public sealed record WeatherForecastDto(
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
-    public static readonly IReadOnlyList<string> Summaries = [
-        "Freezing", 
-        "Bracing", 
-        "Chilly", 
-        "Cool", 
-        "Mild", 
-        "Warm", 
-        "Balmy", 
-        "Hot", 
-        "Sweltering", 
-        "Scorching"
-        ];
+    public static readonly HashSet<string> Summaries = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "Freezing",
+        "Bracing",
+        "Chilly",
+        "Cool",
+        "Mild",
+        "Warm",
+        "Balmy",
+        "Hot",
+        "Sweltering",
+        "Scorching",
+    };
 }

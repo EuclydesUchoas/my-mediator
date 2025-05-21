@@ -7,7 +7,7 @@ public sealed class GetWeatherForecastBySummaryQueryHandler : IRequestHandler<Ge
 {
     public async Task<WeatherForecastDto?> Handle(GetWeatherForecastBySummaryQuery request, CancellationToken cancellationToken)
     {
-        if (!WeatherForecastDto.Summaries.Contains(request.Summary))
+        if (!WeatherForecastDto.Summaries.TryGetValue(request.Summary, out string? summary))
         {
             return null;
         }
@@ -15,8 +15,8 @@ public sealed class GetWeatherForecastBySummaryQueryHandler : IRequestHandler<Ge
         var forecast = await Task.FromResult(
             new WeatherForecastDto(
                 DateOnly.FromDateTime(DateTime.UtcNow), 
-                Random.Shared.Next(-20, 55), 
-                request.Summary
+                Random.Shared.Next(-20, 55),
+                summary
                 ));
 
         if (cancellationToken.IsCancellationRequested)
